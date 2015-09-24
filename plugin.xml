@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="tabris-url-scheme"
+        version="1.0.0">
+
+  <name>Tabris URL scheme</name>
+
+  <description>
+    Enable your app to be launched by calling an URL like:  mycooltabrisapp://
+    You can also add a context and pass params: mycooltabrisapp://someAction?foo=bar
+  </description>
+
+  <author>Jochen Krause</author>
+
+  <license>MIT</license>
+
+  <keywords>Custom URL Scheme, URLscheme, URL scheme, Custom URL, Launch App</keywords>
+
+  <repo>https://github.com/eclipsesource/tabris-url-scheme.git</repo>
+
+  <issue>https://github.com/eclipsesource/tabris-url-scheme/issues</issue> />
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>$URLSCHEME</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+  </platform>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/*/application/activity">
+      <intent-filter>
+        <data android:scheme="$URLSCHEME"/>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+      </intent-filter>
+    </config-file>
+  </platform>
+
+
+</plugin>
